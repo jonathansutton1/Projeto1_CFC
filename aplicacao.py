@@ -20,9 +20,9 @@ import numpy as np
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
 #use uma das 3 opcoes para atribuir à variável a porta usada
-#serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
+serialName = "/dev/ttyACM0"            # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM7"                  # Windows(variacao de)
+#serialName = "COM7"                  # Windows(variacao de)
 
 
 def main():
@@ -33,24 +33,24 @@ def main():
         
     
         # Ativa comunicacao. Inicia os threads e a comunicação seiral 
+        print("Comunicação Aberta")
         com1.enable()
-        if com1.enable() == True:
-            print("Comunicação Aberta")
+        
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         
-        imageR = "./img/downArrowGray.png"
+        imageR = "./img/download.jpeg"
         imageW = "./img/copiaRecebida.png"
         #aqui você deverá gerar os dados a serem transmitidos. 
         #seus dados a serem transmitidos são uma lista de bytes a serem transmitidos. Gere esta lista com o 
         #nome de txBuffer. Ela sempre irá armazenar os dados a serem enviados.
         print("Carregando imagem para transmissão")
         print(".{}".format(imageR))
-        with open("./img/downArrowGray.png", "rb") as image:
+        with open("./img/download.jpeg", "rb") as image:
             txBuffer = image.read()
-        print(txBuffer.rx.getBufferLen())
+
         #faça aqui uma conferência do tamanho do seu txBuffer, ou seja, quantos bytes serão enviados.
-       
-            
+        print(len(txBuffer))
+        
         #finalmente vamos transmitir os tados. Para isso usamos a funçao sendData que é um método da camada enlace.
         #faça um print para avisar que a transmissão vai começar.
         #tente entender como o método send funciona!
@@ -68,13 +68,14 @@ def main():
         
         #Será que todos os bytes enviados estão realmente guardadas? Será que conseguimos verificar?
         #Veja o que faz a funcao do enlaceRX  getBufferLen
-        buffer_size = com1.rx.getBufferLen()
-        print(buffer_size)
         #acesso aos bytes recebidos
+
         print("Recepção vai Comear")
         txLen = len(txBuffer)
         rxBuffer, nRx = com1.getData(txLen)
+        print(com1.rx.getBufferLen())
         print("recebeu {}" .format(rxBuffer))
+
             
         print("Salvando dados no arquivo")
         print("- {}".format(imageW))
