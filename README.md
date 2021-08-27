@@ -1,3 +1,3 @@
-##Projeto 1 de Camada Física da Computação
+## Projeto 1 de Camada Física da Computação
 
-**Desenvolvido por:** Jonathan Sutton
+**Desenvolvido por:** Cesar Ades e Jonathan Sutton
